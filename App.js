@@ -15,6 +15,8 @@ export default class App extends Component {
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.instructions}>CopyRight@2018</Text>
+        <Text style={styles.instructions}>Vo Duy Anh</Text>
       </View>
     );
   }
