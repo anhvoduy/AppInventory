@@ -31,16 +31,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginTop: 10
     },
-    // welcome: {
-    //     fontSize: 20,
-    //     textAlign: 'center',
-    //     paddingTop: 60
-    // },
-    // instructions: {
-    //     textAlign: 'center',
-    //     color: '#333333',
-    //     marginBottom: 5
-    // },
     text_bold: {
         fontWeight: '700',
         fontSize: 20
