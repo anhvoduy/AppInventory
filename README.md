@@ -1,1 +1,1 @@
-react-native-estore
+react-native: estore
