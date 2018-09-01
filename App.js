@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import styles from './Styles';
+import Container from './Container';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -9,7 +11,27 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isLoggedIn: false,
+      checkingAuth: true
+    }
+    this.onLogin = this.onLogin.bind(this);
+    this.onLogout = this.onLogout.bind(this);
+  }
+
+  onLogin(){
+    this.setState({ isLoggedIn: true });
+  }
+
+  onLogout(){
+    this.setState({ isLoggedIn: false });
+  }
+
   render() {
+    let { isLoggedIn, checkingAuth, authInfo } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
