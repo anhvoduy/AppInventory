@@ -1,3 +1,3 @@
-react-native: estore
-copyright: 2018
-author: voduyanh
+- react-native: estore
+- copyright: 2018
+- author: voduyanh
