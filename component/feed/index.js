@@ -48,7 +48,7 @@ class Feed extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                let feedItems = _.filter(data, (ev) => { return ev.type == 'PushEvent' || ev.type == 'PullRequestEvent'});
+                let feedItems = _.filter(data, (ev) => { return ev.type == 'PushEvent'; });
                 this.setState({ 
                     dataSource: this.state.dataSource.cloneWithRows(feedItems),
                     showProgress: false

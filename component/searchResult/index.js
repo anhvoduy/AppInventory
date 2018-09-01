@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { View, Text, ListView, Image, TouchableHighlight, ActivityIndicator } from 'react-native';
 import styles from './style';
 
-const logo = require('../../images/master.png');
+const logoStar = require('../../images/star.png');
+const logoFork = require('../../images/fork.png');
+const logoInbox = require('../../images/inbox.png');
 
 class SearchResult extends Component {
     constructor(props) {
@@ -54,15 +56,15 @@ class SearchResult extends Component {
                     marginBottom: 20
                 }}>
                     <View style={styles.repoCell}>
-                        <Image source={logo} style={styles.repoCellIcon}></Image>
+                        <Image source={logoStar} style={styles.repoCellIcon}></Image>
                         <Text style={styles.repoCellLabel}>{rowData.stargazers_count}</Text>
                     </View>
                     <View style={styles.repoCell}>
-                        <Image source={logo} style={styles.repoCellIcon}></Image>
+                        <Image source={logoFork} style={styles.repoCellIcon}></Image>
                         <Text style={styles.repoCellLabel}>{rowData.forks}</Text>
                     </View>
                     <View style={styles.repoCell}>
-                        <Image source={logo} style={styles.repoCellIcon}></Image>
+                        <Image source={logoInbox} style={styles.repoCellIcon}></Image>
                         <Text style={styles.repoCellLabel}>{rowData.open_issues}</Text>
                     </View>
                 </View>
@@ -80,7 +82,7 @@ class SearchResult extends Component {
         }
         
         return (
-            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+            <View style={{ flex: 1, justifyContent: 'flex-start' , paddingTop: 60 }}>
                 <ListView dataSource={this.state.datasource} renderRow={this.renderRow.bind(this)} />
             </View>
         );
