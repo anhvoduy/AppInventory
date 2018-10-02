@@ -42,8 +42,12 @@ class App extends Component {
 
   render() {
     let { isLoggedIn, checkingAuth, authInfo } = this.state;
-    debugger;
-    if(checkingAuth) {
+    if(authInfo === undefined || authInfo === null){
+      return (
+        <Login onLogin={this.onLogin} />
+      );
+    }
+    else if(checkingAuth) {
       return (
         <View style={styles.container}>
           <ActivityIndicator animating={true} size='large' style={styles.loader}>
