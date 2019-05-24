@@ -2,23 +2,33 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ActivityIndicator } from 'react-native';
 
+import api from '../../services/api';
+
 class ProductList extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showProgress: true
+            showProgress: true,
+            products: []
         }
     }
 
     componentDidMount() {
-        let { searchQuery } = this.props;
-        console.log('- searchQuery:', searchQuery);
+        this.getProducts();
+    }
 
-        let self = this;
-        setTimeout(function() {
-            self.setState({ showProgress: false });
-        }, 3000);
+    getProducts() {
+        let url = 'https://4i2ufdga01.execute-api.us-east-1.amazonaws.com/api/product/list';
+        api.get(url)
+        .then((res) => {
+            let { products } = res.data;
+            console.log('- products:', products.length);
+            this.setState({ products: products });
+        })
+        .finally(() => {
+            this.setState({ showProgress: false });
+        });
     }
 
     render(){
