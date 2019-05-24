@@ -1,3 +1,3 @@
-- react-native: aws + lambda functions
+- react-native: sample app
 - copyright: 2018
 - author: voduyanh
