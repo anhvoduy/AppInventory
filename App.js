@@ -42,7 +42,6 @@ class App extends Component {
 
   render() {
     let { isLoggedIn, checkingAuth, authInfo } = this.state;
-    debugger;
     if(checkingAuth) {
       return (
         <View style={styles.container}>
