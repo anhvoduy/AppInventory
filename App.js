@@ -42,7 +42,7 @@ class App extends Component {
 
   render() {
     let { isLoggedIn, checkingAuth, authInfo } = this.state;
-    if(authInfo === undefined || authInfo === null){
+    if(checkingAuth) {
       return (
         <Login onLogin={this.onLogin} />
       );
