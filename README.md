@@ -1,3 +1,3 @@
-- react-native: estore
+- react-native: aws + lambda functions
 - copyright: 2018
 - author: voduyanh
