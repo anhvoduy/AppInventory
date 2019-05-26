@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ListView, ActivityIndicator } from 'react-native';
 
 import api from '../../services/api';
+import styles from './style';
 
 class ProductList extends Component {
     constructor(props) {
         super(props);
 
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             showProgress: true,
-            products: []
+            dataSource: ds.cloneWithRows([])
         }
     }
 
@@ -19,20 +21,27 @@ class ProductList extends Component {
     }
 
     getProducts() {
-        let url = 'https://4i2ufdga01.execute-api.us-east-1.amazonaws.com/api/product/list';
-        api.get(url)
+        api.get('product/list')
         .then((res) => {
             let { products } = res.data;
-            console.log('- products:', products.length);
-            this.setState({ products: products });
+            this.setState({ 
+                dataSource: this.state.dataSource.cloneWithRows(products)
+            });
         })
         .finally(() => {
             this.setState({ showProgress: false });
         });
     }
 
+    renderRow(rowData) {
+        return (
+            <Text>{rowData.ProductId + ': ' + rowData.ProductName}</Text>
+        )
+    }
+
     render(){
-        if(this.state.showProgress){
+        let { showProgress, products } = this.state;
+        if(showProgress){
             return (
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <ActivityIndicator size='large' animating={true} />
@@ -42,7 +51,7 @@ class ProductList extends Component {
 
         return (
             <View style={{ flex: 1, justifyContent: 'flex-start' , paddingTop: 60 }}>
-                <Text>Display Product ListView</Text>
+                <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)} />
             </View>
         );
     }
