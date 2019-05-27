@@ -17,7 +17,7 @@ class Product extends Component {
     onSearchPressed(){
         if(this.state.searchQuery && this.state.searchQuery != ''){
             this.props.navigator.push({
-                title: 'Search Result',
+                title: 'Product List',
                 component: ProductList,
                 passProps: {
                     searchQuery: this.state.searchQuery
@@ -29,14 +29,14 @@ class Product extends Component {
     render() {
         return (
             <View style={styles.productContainer}>
-                <TextInput  style={styles.input} 
-                            onChangeText={(value) => { this.setState({ searchQuery: value }) } } 
-                            placeholder='enter product name' 
-                            autoCapitalize='none' >
+                <TextInput  style={styles.input}
+                            onChangeText={(value) => { this.setState({ searchQuery: value }) } }
+                            placeholder='enter product name'
+                            autoCapitalize='none'>
                 </TextInput>
 
-                <TouchableHighlight 
-                    onPress={this.onSearchPressed.bind(this)} 
+                <TouchableHighlight
+                    onPress={this.onSearchPressed.bind(this)}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Search</Text>
                 </TouchableHighlight>
