@@ -4,6 +4,7 @@ const AsyncStorage = require('react-native').AsyncStorage;
 const authKey = 'authKey';
 const userKey = 'userKey';
 
+const gitHubUrl = 'https://api.github.com/user';
 class authService {
     getAuthInfo(callback) {
         AsyncStorage.multiGet([authKey, userKey], (err, val) => {
@@ -30,7 +31,7 @@ class authService {
     login(credentials, callback){
         let encodeAuth = new buffer.Buffer(credentials.username + ':' + credentials.password).toString('base64');
 
-        fetch('https://api.github.com/user',{
+        fetch(gitHubUrl,{
             headers: {
                 'Authorization': 'Basic ' + encodeAuth
             }
