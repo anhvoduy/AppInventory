@@ -7,16 +7,36 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    
+    /* first column */
     repoCell: {
-        width: 50,
+        width: 100,
         alignItems: 'center'
     },
-    repoCellIcon: {
-        width: 20,
-        height: 20
+    repoCellImage: {
+        width: 80,
+        height: 80
     },
     repoCellLabel: {
         textAlign: 'center'
+    },
+    
+    /* second column */
+    infoCell: {
+        width: 200,
+    },
+    infoCellLabel: {
+        textAlign: 'left',
+        marginTop: 5,
+    },
+    
+    /* third column */
+    likedCell: {
+        width: 100,
+        alignItems: 'center',
+    },
+    likedCellLabel: {
+        textAlign: 'center',
     }
 });
 

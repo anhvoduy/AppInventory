@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ListView, ActivityIndicator } from 'react-native';
+import { View, Text, ListView, ActivityIndicator, Image } from 'react-native';
 
 import api from '../../services/api';
 import styles from './style';
@@ -35,12 +35,28 @@ class ProductList extends Component {
 
     renderRow(rowData) {
         return (
-            <Text>{rowData.ProductId + ': ' + rowData.ProductName}</Text>
+            <View style={{ padding: 10, borderColor: '#D7D7D7', borderBottomWidth: 1, backgroundColor: '#fff' }}>
+                <Text style={{ fontSize: 18, fontWeight: '600' }}>{`${rowData.ProductName} (${rowData.ProductId})`}</Text>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 20 }}>
+                    <View style={styles.repoCell}>
+                        <Image source={{uri: rowData.ImageUrl}} style={styles.repoCellImage}></Image>
+                    </View>
+                    <View style={styles.infoCell}>
+                        <Text style={styles.infoCellLabel}>{rowData.ProductName}</Text>
+                        <Text style={styles.infoCellLabel}>{`Location: ${rowData.Location ? rowData.Location.Name : ''}`}</Text>
+                        <Text style={styles.infoCellLabel}>{`Category: ${rowData.Category ? rowData.Category.Name : ''}`}</Text>
+                        <Text style={styles.infoCellLabel}>{`Price: ${rowData.Price ? rowData.Price : 1} (USD)`}</Text>
+                    </View>
+                    <View style={styles.likedCell}>
+                        <Text style={styles.likedCellLabel}>{rowData.Liked ? rowData.Liked : 1}</Text>
+                    </View>
+                </View>
+            </View>
         )
     }
 
     render(){
-        let { showProgress, products } = this.state;
+        let { showProgress, dataSource } = this.state;
         if(showProgress){
             return (
                 <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -51,15 +67,14 @@ class ProductList extends Component {
 
         return (
             <View style={{ flex: 1, justifyContent: 'flex-start' , paddingTop: 60 }}>
-                <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)} />
+                <ListView dataSource={dataSource} renderRow={this.renderRow.bind(this)} />
             </View>
         );
     }
 };
 
 ProductList.propTypes = {
-  title: PropTypes.string,
-  searchQuery: PropTypes.string
+  title: PropTypes.string
 };
 
 export default ProductList;

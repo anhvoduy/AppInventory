@@ -26,7 +26,7 @@ class Container extends Component {
                         <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Product, title: 'Product' }}></NavigatorIOS>
                 </TabBarIOS.Item>
                
-                <TabBarIOS.Item 
+                <TabBarIOS.Item
                     title='Search'
                     selected={this.state.selectedTab == 'search'}
                     icon={logoSearch}
