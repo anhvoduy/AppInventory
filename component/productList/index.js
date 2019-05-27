@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ListView, ActivityIndicator, Image, TouchableHighlight } from 'react-native';
+
 import ProductItem from '../productItem';
 
 import api from '../../services/api';
