@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ListView, ActivityIndicator, Image } from 'react-native';
+import { View, Text, ListView, ActivityIndicator, Image, TouchableHighlight } from 'react-native';
+import ProductItem from '../productItem';
 
 import api from '../../services/api';
 import styles from './style';
@@ -14,6 +15,8 @@ class ProductList extends Component {
             showProgress: true,
             dataSource: ds.cloneWithRows([])
         }
+
+        this.onProductItem = this.onProductItem.bind(this)
     }
 
     componentDidMount() {
@@ -33,24 +36,39 @@ class ProductList extends Component {
         });
     }
 
+    onProductItem(Id) {
+        console.log(' touch:', Id);
+        if(Id){
+            this.props.navigator.push({
+                title: 'Product Detail',
+                component: ProductItem,
+                passProps: {
+                    id: Id
+                }
+            });
+        }
+    }
+
     renderRow(rowData) {
         return (
             <View style={{ padding: 10, borderColor: '#D7D7D7', borderBottomWidth: 1, backgroundColor: '#fff' }}>
-                <Text style={{ fontSize: 18, fontWeight: '600' }}>{`${rowData.ProductName} (${rowData.ProductId})`}</Text>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 20 }}>
-                    <View style={styles.repoCell}>
-                        <Image source={{uri: rowData.ImageUrl}} style={styles.repoCellImage}></Image>
+                <Text style={{ fontSize: 18, fontWeight: '600' }}>{`${rowData.ProductName} (${rowData.ProductId})`}</Text>  
+                <TouchableHighlight onPress={() => this.onProductItem(rowData.Id)}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginBottom: 20 }}>
+                        <View style={styles.repoCell}>
+                            <Image source={{uri: rowData.ImageUrl}} style={styles.repoCellImage}></Image>
+                        </View>
+                        <View style={styles.infoCell}>
+                            <Text style={styles.infoCellLabel}>{rowData.ProductName}</Text>
+                            <Text style={styles.infoCellLabel}>{`Location: ${rowData.Location ? rowData.Location.Name : ''}`}</Text>
+                            <Text style={styles.infoCellLabel}>{`Category: ${rowData.Category ? rowData.Category.Name : ''}`}</Text>
+                            <Text style={styles.infoCellLabel}>{`Price: ${rowData.Price ? rowData.Price : 1} (USD)`}</Text>
+                        </View>
+                        <View style={styles.likedCell}>
+                            <Text style={styles.likedCellLabel}>{rowData.Liked ? rowData.Liked : 1}</Text>
+                        </View>
                     </View>
-                    <View style={styles.infoCell}>
-                        <Text style={styles.infoCellLabel}>{rowData.ProductName}</Text>
-                        <Text style={styles.infoCellLabel}>{`Location: ${rowData.Location ? rowData.Location.Name : ''}`}</Text>
-                        <Text style={styles.infoCellLabel}>{`Category: ${rowData.Category ? rowData.Category.Name : ''}`}</Text>
-                        <Text style={styles.infoCellLabel}>{`Price: ${rowData.Price ? rowData.Price : 1} (USD)`}</Text>
-                    </View>
-                    <View style={styles.likedCell}>
-                        <Text style={styles.likedCellLabel}>{rowData.Liked ? rowData.Liked : 1}</Text>
-                    </View>
-                </View>
+                </TouchableHighlight>
             </View>
         )
     }
@@ -74,7 +92,8 @@ class ProductList extends Component {
 };
 
 ProductList.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  onProductItem: PropTypes.func
 };
 
 export default ProductList;

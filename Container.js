@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TabBarIOS, NavigatorIOS } from 'react-native';
 import styles from './Styles';
 import Search from './component/search';
-import Product from './component/product';
+import ProductList from './component/productList';
 
 const logoProduct= require('./images/product.png');
 const logoSearch = require('./images/search.png');
@@ -19,11 +19,11 @@ class Container extends Component {
         return (
             <TabBarIOS style={styles.container}>
                 <TabBarIOS.Item
-                    title='Product'
+                    title='Products'
                     selected={this.state.selectedTab == 'product'}
                     icon={logoProduct}
                     onPress={() => this.setState({selectedTab: 'product'})}>
-                        <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Product, title: 'Product' }}></NavigatorIOS>
+                        <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: ProductList, title: 'Products' }}></NavigatorIOS>
                 </TabBarIOS.Item>
                
                 <TabBarIOS.Item
