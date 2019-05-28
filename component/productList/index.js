@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ListView, ActivityIndicator, Image, TouchableHighlight } from 'react-native';
+import { orderBy } from 'lodash';
 
 import ProductItem from '../productItem';
 
@@ -28,7 +29,8 @@ class ProductList extends Component {
         api.get('product/list')
         .then((res) => {
             let { products } = res.data;
-            this.setState({ 
+            products = orderBy(products, ['Liked'], ['desc']);
+            this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(products)
             });
         })
@@ -38,7 +40,6 @@ class ProductList extends Component {
     }
 
     onProductItem(Id) {
-        console.log(' touch:', Id);
         if(Id){
             this.props.navigator.push({
                 title: 'Product Detail',
