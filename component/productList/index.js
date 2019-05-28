@@ -29,6 +29,7 @@ class ProductList extends Component {
         api.get('product/list')
         .then((res) => {
             let { products } = res.data;
+            products.forEach((item) => { if(!item.Liked) item.Liked = 1; });
             products = orderBy(products, ['Liked'], ['desc']);
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(products)
@@ -64,10 +65,10 @@ class ProductList extends Component {
                             <Text style={styles.infoCellLabel}>{rowData.ProductName}</Text>
                             <Text style={styles.infoCellLabel}>{`Location: ${rowData.Location ? rowData.Location.Name : ''}`}</Text>
                             <Text style={styles.infoCellLabel}>{`Category: ${rowData.Category ? rowData.Category.Name : ''}`}</Text>
-                            <Text style={styles.infoCellLabel}>{`Price: ${rowData.Price ? rowData.Price : 1} (USD)`}</Text>
+                            <Text style={styles.infoCellLabel}>{`Price: ${rowData.Price ? rowData.Price : ''} (USD)`}</Text>
                         </View>
                         <View style={styles.likedCell}>
-                            <Text style={styles.likedCellLabel}>{rowData.Liked ? rowData.Liked : 1}</Text>
+                            <Text style={styles.likedCellLabel}>{rowData.Liked ? rowData.Liked : ''}</Text>
                         </View>
                     </View>
                 </TouchableHighlight>
